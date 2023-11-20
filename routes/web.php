@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Middleware\VaoSanBay;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,4 +40,13 @@ Route::controller(PostController::class)->prefix('bai-viet')->group(function () 
     Route::get('/tao', 'getTaoBaiViet')->name('get-create');
     Route::post('/tao', 'postTaoBaiViet')->name('post-create');
     Route::get('/{id}', 'layBaiViet')->where(['id' => '[0-9]+'])->name('post-details');
+});
+
+// Bai 3: Middleware
+Route::controller(PostController::class)->prefix('san-bay')->group(function () {
+    Route::get('/san-a', 'vaoSanBay')->middleware([VaoSanBay::class]);
+});
+
+Route::get('/quay-ve', function () {
+    return "Mua ve di ban";
 });

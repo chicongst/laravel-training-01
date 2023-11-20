@@ -35,4 +35,8 @@ class PostController extends Controller
         $post = Post::find($id);
         return view('posts.details', ['post' => $post]);
     }
+
+    public function vaoSanBay() {
+        return 'Ban da vao san bay!';
+    }
 }
