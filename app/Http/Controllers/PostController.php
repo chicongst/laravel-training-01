@@ -36,7 +36,8 @@ class PostController extends Controller
         return view('posts.details', ['post' => $post]);
     }
 
-    public function vaoSanBay() {
-        return 'Ban da vao san bay!';
+    public function vaoSanBay(Request $request) {
+        $ticket = $request->get('ticket');
+        return "Ban da vao san bay voi ma ve la: $ticket!";
     }
 }
