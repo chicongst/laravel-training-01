@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\LoginController;
 use App\Http\Middleware\VaoSanBay;
+use App\Models\Post;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,19 @@ use App\Http\Middleware\VaoSanBay;
 |
 */
 
-Route::middleware('auth')->get('/', function () {
-    return view('hocphp');
-});
+Route::get('/', function () {
+    $posts = Post::paginate(3);
+    $singlePost = Post::first();
+    return view('client.index', ['posts' => $posts, 'singlePost' => $singlePost]);
+})->name('home');
+
+Route::get('/form', function () {
+    return view('client.form');
+})->name('form');
+
+Route::get('/table', function () {
+    return view('client.table');
+})->name('table');
 
 // Bài 1: Views
 Route::middleware('auth')->prefix('danh-muc')->group(function () {
